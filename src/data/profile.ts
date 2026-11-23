@@ -10,26 +10,26 @@ export const projectFormats = ["網站", "PPT"] as const;
 export type ProjectFormat = (typeof projectFormats)[number];
 
 export const profile = {
-  name: "林以晴", enName: "Yi-Ching Lin", initials: "YC",
+  name: "高湘芸", enName: "Kao, Siang-Yun", initials: "Y",
   roles: ["在學學生", "商業分析學習者", "程式專題實作者", "藝術與運動愛好者"],
   intro: "從商業問題出發，用資料分析與程式實作找答案。整理課程專題、學習歷程與課外探索，迎向職涯與研究所的下一步。",
   about: "目前仍在學，持續累積商業分析與程式實作經驗。我喜歡釐清問題、整理證據，再把想法做成網站或簡報。藝術讓我練習觀察與表達，運動讓我培養自律與團隊合作。期待在工作與研究中，延伸這些跨領域的探索。",
-  email: "hello@yiching.design", location: "台灣", languages: "中文、英文（範例）",
+  email: "0119sharonkao@gmail.com", location: "台灣", languages: "中文、英文、日文",
   status: "在學中・求職與研究所準備",
-  education: "學校／科系／年級待補", exampleNotice: "個人資料與作品為排版範例，尚非實際申請經歷。",
+  education: "東吳大學｜國際貿易學系｜大二",
+  exampleNotice: "個人資料與作品為排版範例，尚非實際申請經歷。",
   educationFields: [
-    { key: "school", label: "學校", placeholder: "填寫你的學校" },
-    { key: "department", label: "科系", placeholder: "填寫你的科系" },
-    { key: "year", label: "年級", placeholder: "填寫你的年級" },
+    { label: "學校", value: "東吳大學" },
+    { label: "科系", value: "國際貿易學系" },
+    { label: "年級", value: "大二" },
   ],
-  educationDraftNote: "暫填欄位，重新整理後會清空；目前尚未儲存或公開。",
   stats: [
     { value: 3, suffix: "", label: "專長主軸" },
     { value: 2, suffix: "", label: "作品格式" },
     { value: 2, suffix: "", label: "申請方向" },
     { value: 2, suffix: "", label: "藝術與運動領域" },
   ],
-  interests: ["🎨 藝術創作", "📷 攝影觀察", "🏃 運動訓練", "🏸 球類運動"],
+  interests: ["🎨 藝術創作", "📷 攝影觀察", "🏃 運動訓練"],
   keywords: [
     { front: "分析", back: "先釐清問題與假設，再用資料整理有根據的觀點。", tone: "mint" },
     { front: "實作", back: "把課堂所學轉成程式與網站，透過實際成果檢驗想法。", tone: "sky" },
