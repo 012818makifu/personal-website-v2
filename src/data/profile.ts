@@ -1,6 +1,6 @@
 import plantApp from "@/assets/work-plant-app.jpg";
 import cafeBrand from "@/assets/work-cafe-brand.jpg";
-import dashboard from "@/assets/work-dashboard.jpg";
+import dashboard from "@/assets/website-cover.png";
 import poster from "@/assets/work-3d-poster.jpg";
 
 // Example student content; school, contact details, and actual work await the owner.
@@ -102,8 +102,8 @@ export const projects: Project[] = [
     year: "2026",
     image: dashboard,
     role: "自行完成",
-    tools: ["Claude", "工具二"],
-    summary: "為統合弱勢未成年的食、衣、教育，三個方面資源的網站。\n使用對象:\n1.需要以上資源的孩童、家庭\n2.期望提供資源的志願者\n使用方式:\n1.使用關鍵字，或是問答，找出查詢者可以用的資源\n2.點及地圖，查看活動範圍附近的資源",
+    tools: ["Claude", "netlify"],
+    summary: "為統合弱勢未成年的食、衣、教育，三個方面資源的網站。\n使用對象:\n1.需要以上資源的孩童、家庭\n2.期望提供資源的志願者\n使用方式:\n1.使用關鍵字，或是問答，找出查詢者可以用的資源\n2.點擊地圖，一步步縮小範圍，查看活動範圍附近的資源",
     results: [],
     websiteUrl: "https://astonishing-sunburst-c57be3.netlify.app/",
   },
