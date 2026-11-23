@@ -80,7 +80,7 @@ function PortfolioPage() {
             <img src={current.image} alt={`${current.title} 網站排版範例`} width={1200} height={675} className="aspect-video w-full object-cover" />
           </div>}
           <div className="p-6 md:p-8">
-            <p className="leading-relaxed text-muted-foreground">{current.summary}</p>
+            <p className="whitespace-pre-line leading-relaxed text-muted-foreground">{current.summary}</p>
             <dl className="mt-6 grid gap-6 border-y py-5 sm:grid-cols-2">
               <div><dt className="text-xs text-muted-foreground">個人貢獻</dt><dd className="mt-1 font-semibold">{current.role}</dd></div>
               <div><dt className="text-xs text-muted-foreground">使用工具</dt><dd className="mt-1 font-semibold">{current.tools.join(" / ")}</dd></div>
