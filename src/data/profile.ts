@@ -17,7 +17,7 @@ export const profile = {
   email: "0119sharonkao@gmail.com", location: "台灣", languages: "中文、英文、日文",
   status: "在學中・求職與研究所準備",
   education: "東吳大學｜國際貿易學系｜大二",
-  exampleNotice: "個人資料與作品為排版範例，尚非實際申請經歷。",
+    exampleNotice: "作品集目前展示排版範例，實際專案將陸續更新。",
   educationFields: [
     { label: "學校", value: "東吳大學" },
     { label: "科系", value: "國際貿易學系" },
@@ -46,7 +46,7 @@ export const timeline = {
     { period: "課外探索・範例", title: "藝術與運動參與", org: "課外活動", detail: "透過創作紀錄與規律運動，累積表達、團隊合作及時間管理的經驗。" },
   ],
   學歷: [
-    { period: "目前在學", title: "大學在學", org: "學校／科系／年級待補", detail: "預計整理修課紀錄、專題方向與研究興趣，作為求職及研究所申請的學習脈絡。" },
+    { period: "2025 年入學・目前在學", title: "東吳大學 國際貿易學系", org: "大學部二年級", detail: "修習國際貿易、商用統計與行銷，也透過課程專題探索資料分析與人工智慧的商業應用。" },
   ],
 } as const;
 

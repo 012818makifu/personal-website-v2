@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/skills")({
   head: () => ({
     meta: [
-      { title: "個人專長｜林以晴 Yi-Ching Lin" },
-      { name: "description", content: "在學學生的商業分析、程式作品及藝術與運動興趣，呈現學習方法與跨領域能力。" },
-      { property: "og:title", content: "個人專長｜林以晴 Yi-Ching Lin" },
-      { property: "og:description", content: "在學學生的商業分析、程式作品及藝術與運動興趣，呈現學習方法與跨領域能力。" },
+      { title: "個人專長｜高湘芸" },
+      { name: "description", content: "虛擬商業分析、程式作品及課外嗜好，呈現我的技能與跨領域能力。" },
+      { property: "og:title", content: "個人專長｜高湘芸" },
+      { property: "og:description", content: "虛擬商業分析、程式作品及課外嗜好，呈現我的技能與跨領域能力。" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

@@ -12,10 +12,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "個人資訊｜林以晴 Yi-Ching Lin" },
-      { name: "description", content: "認識在學學生林以晴：學習經歷、商業分析與程式作品，為求職及研究所申請整理的個人網站。" },
-      { property: "og:title", content: "個人資訊｜林以晴 Yi-Ching Lin" },
-      { property: "og:description", content: "認識在學學生林以晴：學習經歷、商業分析與程式作品，為求職及研究所申請整理的個人網站。" },
+      { title: "個人資訊｜高湘芸" },
+      { name: "description", content: "認識我：學習經歷、商業分析與程式作品，為整理經歷以及作品所寫的個人網站。" },
+      { property: "og:title", content: "個人資訊｜高湘芸" },
+      { property: "og:description", content: "認識我：學習經歷、商業分析與程式作品，為整理經歷以及作品所寫的個人網站。" },
       { property: "og:type", content: "profile" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

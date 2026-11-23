@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({ meta: [
-    { title: "作品集｜林以晴・網站與 PPT" },
-    { name: "description", content: "在學學生的網站與 PowerPoint 作品，整理商業分析、程式專題與課外學習成果，供求職及研究所申請參考。" },
-    { property: "og:title", content: "作品集｜林以晴・網站與 PPT" },
+    { title: "作品集｜高湘芸" },
+    { name: "description", content: "發揮我撰寫程式的能力，將過往的作品整理成清晰易讀的網頁。" },
+    { property: "og:title", content: "作品集｜高湘芸" },
     { property: "og:description", content: "網站實作與簡報專題，呈現研究方法、個人貢獻與學習反思。" },
     { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
   ] }), component: PortfolioPage,
