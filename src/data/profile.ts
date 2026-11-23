@@ -17,7 +17,7 @@ export const profile = {
   email: "0119sharonkao@gmail.com", location: "台灣", languages: "中文、英文、日文",
   status: "在學中・求職與研究所準備",
   education: "東吳大學｜國際貿易學系｜大二",
-    exampleNotice: "作品集目前展示排版範例，實際專案將陸續更新。",
+  exampleNotice: "個人資料與作品為排版範例，尚非實際申請經歷。",
   educationFields: [
     { label: "學校", value: "東吳大學" },
     { label: "科系", value: "國際貿易學系" },
@@ -46,7 +46,7 @@ export const timeline = {
     { period: "課外探索・範例", title: "藝術與運動參與", org: "課外活動", detail: "透過創作紀錄與規律運動，累積表達、團隊合作及時間管理的經驗。" },
   ],
   學歷: [
-    { period: "2025 年入學・目前在學", title: "東吳大學 國際貿易學系", org: "大學部二年級", detail: "修習國際貿易、商用統計與行銷，也透過課程專題探索資料分析與人工智慧的商業應用。" },
+    { period: "目前在學", title: "大學在學", org: "學校／科系／年級待補", detail: "預計整理修課紀錄、專題方向與研究興趣，作為求職及研究所申請的學習脈絡。" },
   ],
 } as const;
 
@@ -74,10 +74,10 @@ export const softSkills = [
   { name: "簡報表達", desc: "用清楚的脈絡說明問題、方法與結論。" },
   { name: "自主學習", desc: "遇到不熟悉的工具與領域，主動找資料並嘗試實作。" },
 ] as const;
-export const tools = ["Excel", "PowerPoint", "Python", "JavaScript", "Git", "資料分析", "藝術", "運動"] as const;
+export const tools = ["Excel", "PowerPoint", "Python", "C++", "資料分析", "藝術", "運動"] as const;
 
 export const siteCopy = {
-  interests: "課業之外，我的探索", skillsIntro: "從商業分析、程式作品，到藝術與運動，記錄跨領域的學習與累積。",
+  interests: "課業之外，我的探索", skillsIntro: "結合本系的商業、國際貿易知識，以及程式技能，記錄跨領域的學習與累積。",
   portfolioIntro: "課程專題與自主實作，從問題、方法到成果，留下每一步的學習紀錄。",
 } as const;
 export type ProjectCategory = SkillCategory;
@@ -93,20 +93,7 @@ export const projects: Project[] = [
     { title: "研究方法", body: "建立比較框架", points: ["整理公開市場資料", "比較價格、地點與產品定位", "記錄資料來源與分析限制"] },
     { title: "策略與反思", body: "從資料回到商業問題", points: ["提出差異化定位假設", "規劃後續驗證方式", "反思樣本與資料限制"] },
   ] },
-    {
-    id: "website-project-01",
-    title: "童行資源地圖",
-    subtitle: "網站作品",
-    category: "程式作品",
-    format: "網站",
-    year: "2026",
-    image: dashboard,
-    role: "自行完成",
-    tools: ["Claude", "Netlify"],
-    summary: "為弱勢兒童，以及想為弱勢兒童提供幫助的人做的。使用者可以透過地圖，尋找附近有提供資源的地點。又或是透過搜尋、問答來找出符合自身需求的社會援助。",
-    results: [],
-    websiteUrl: "https://astonishing-sunburst-c57be3.netlify.app/",
-  },
+  { id: "study-dashboard", title: "學習紀錄儀表板", subtitle: "互動網站專題・範例", category: "程式作品", format: "網站", year: "範例", image: dashboard, role: "介面規劃 / 程式實作", tools: ["JavaScript", "HTML / CSS"], summary: "將學習進度與任務整理成網站，練習資料呈現、篩選與互動流程。正式作品網址待補。", results: [{ value: "互動介面", label: "實作重點" }, { value: "開發紀錄", label: "學習成果" }] },
   { id: "plant-log", title: "植物觀察日誌", subtitle: "個人網站實作・範例", category: "程式作品", format: "網站", year: "範例", image: plantApp, role: "需求整理 / 網站實作", tools: ["JavaScript", "Git"], summary: "從日常觀察出發，規劃可記錄植物狀態的網站，累積表單與資料整理經驗。正式作品網址待補。", results: [{ value: "紀錄流程", label: "功能規劃" }, { value: "自主實作", label: "專題形式" }] },
   { id: "art-journal", title: "藝術與運動探索", subtitle: "課外學習簡報・範例", category: "業餘興趣", format: "PPT", year: "範例", image: poster, role: "活動紀錄 / 視覺整理", tools: ["PowerPoint", "攝影"], summary: "整理藝術創作與運動參與的觀察，呈現課業之外的自律、表達與團隊合作。", results: [{ value: "藝術", label: "視覺與觀察" }, { value: "運動", label: "自律與合作" }], slides: [
     { title: "藝術與運動探索", body: "課外學習紀錄", points: ["藝術：練習觀察與表達", "運動：建立自律與合作"] },
