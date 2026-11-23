@@ -71,7 +71,7 @@ function PortfolioPage() {
       <DialogContent onOpenAutoFocus={(e) => e.preventDefault()} className="top-[4dvh] block max-h-[92dvh] w-[calc(100%-2rem)] max-w-4xl translate-y-0 gap-0 overflow-y-auto border-[1.5px] border-ink p-0 shadow-pop-lg">
         {current && <div key={current.id}>
           <div className="p-6 pb-4 pr-12 md:px-8">
-            <p className="text-xs font-bold text-primary">{current.category} / {current.format} / 範例</p>
+            <p className="text-xs font-bold text-primary">{current.category} / {current.format} / {current.year}</p>
             <DialogTitle className="mt-2 text-2xl font-bold md:text-3xl">{current.title}</DialogTitle>
             <DialogDescription className="mt-2 text-sm">{current.subtitle}</DialogDescription>
           </div>
