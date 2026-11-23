@@ -1,0 +1,233 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * Keep every @import in this top block. Web fonts load via <link> in src/routes/__root.tsx.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Noto Sans TC", ui-sans-serif, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-ink: var(--ink);
+  --color-sky: var(--sky);
+  --color-pop: var(--pop);
+  --color-mint: var(--mint);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-blob: blob 12s ease-in-out infinite;
+  --animate-page-in: page-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-wiggle: wiggle 0.5s ease-in-out;
+  --animate-blink: blink 1s step-end infinite;
+}
+
+/* Commercial: charcoal + graphite with an orange-red pop on warm paper, ink outlines. */
+:root {
+  --radius: 1rem;
+  --background: oklch(0.976 0.003 106);
+  --foreground: oklch(0.19 0.007 258);
+  --ink: oklch(0.19 0.007 258);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.19 0.007 258);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.19 0.007 258);
+  --primary: oklch(0.3 0.014 262);
+  --primary-foreground: oklch(0.976 0.003 106);
+  --secondary: oklch(0.94 0.004 91);
+  --secondary-foreground: oklch(0.3 0.014 262);
+  --muted: oklch(0.951 0.004 106);
+  --muted-foreground: oklch(0.508 0.018 257);
+  --accent: oklch(0.642 0.187 31);
+  --accent-foreground: oklch(0.19 0.007 258);
+  --mint: oklch(0.929 0.009 85);
+  --sky: oklch(0.926 0.006 240);
+  --pop: oklch(0.642 0.187 31);
+  --pop-soft: oklch(0.681 0.173 33);
+  --pop-deep: oklch(0.543 0.174 30);
+  --destructive: oklch(0.543 0.174 30);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.895 0.006 85);
+  --input: oklch(0.895 0.006 85);
+  --ring: oklch(0.642 0.187 31);
+
+  --gradient-fresh: linear-gradient(120deg, var(--ink), var(--primary));
+  --gradient-pop: linear-gradient(120deg, var(--pop-soft), var(--pop-deep));
+  --gradient-zest: linear-gradient(120deg, var(--accent), var(--sky));
+  --gradient-sunrise: linear-gradient(120deg, var(--pop), var(--muted));
+  --gradient-mesh:
+    radial-gradient(40% 50% at 15% 20%, color-mix(in oklab, var(--mint) 70%, transparent), transparent 70%),
+    radial-gradient(35% 45% at 85% 15%, color-mix(in oklab, var(--sky) 55%, transparent), transparent 70%),
+    radial-gradient(40% 40% at 70% 90%, color-mix(in oklab, var(--pop) 14%, transparent), transparent 70%);
+
+  --shadow-pop: 5px 5px 0 0 var(--ink);
+  --shadow-pop-lg: 8px 8px 0 0 var(--ink);
+  --shadow-soft: 0 20px 50px -20px color-mix(in oklab, var(--primary) 45%, transparent);
+
+  --chart-1: var(--primary);
+  --chart-2: var(--sky);
+  --chart-3: var(--accent);
+  --chart-4: var(--pop);
+  --chart-5: var(--mint);
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--muted);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+}
+
+@utility bg-gradient-fresh { background-image: var(--gradient-fresh); }
+@utility bg-gradient-zest { background-image: var(--gradient-zest); }
+@utility bg-gradient-sunrise { background-image: var(--gradient-sunrise); }
+@utility bg-mesh { background-image: var(--gradient-mesh); }
+@utility bg-gradient-pop { background-image: var(--gradient-pop); }
+@utility text-gradient {
+  background-image: var(--gradient-pop);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility shadow-pop { box-shadow: var(--shadow-pop); }
+@utility shadow-pop-lg { box-shadow: var(--shadow-pop-lg); }
+@utility shadow-soft { box-shadow: var(--shadow-soft); }
+@utility border-ink { border-color: var(--ink); }
+
+/* Card that lifts with an offset ink shadow on hover */
+@utility pop-card {
+  background: var(--card);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-2xl);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-pop-lg);
+  }
+}
+
+@utility dot-grid {
+  background-image: radial-gradient(color-mix(in oklab, var(--ink) 14%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Scroll reveal */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes blob {
+  0%, 100% { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+  33% { border-radius: 60% 40% 35% 65% / 55% 60% 40% 45%; }
+  66% { border-radius: 38% 62% 50% 50% / 62% 38% 62% 38%; }
+}
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* Mouse-follow highlight inside tilt cards (uses --mx/--my set from JS) */
+@utility tilt-shine {
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--card) 65%, transparent), transparent 45%);
+}
+@utility preserve-3d { transform-style: preserve-3d; }
+@utility backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
