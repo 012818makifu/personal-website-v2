@@ -89,7 +89,7 @@ function PortfolioPage() {
               {current.websiteUrl && <Button asChild variant="pop"><a href={current.websiteUrl} target="_blank" rel="noreferrer">開啟網站<ArrowUpRight /></a></Button>}
               {current.videoUrl && <Button asChild variant="pop"><a href={current.videoUrl} target="_blank" rel="noreferrer">在 YouTube 觀看<ArrowUpRight /></a></Button>}
               {current.pdfUrl && <>
-                <Button asChild variant="pop"><a href={current.pdfUrl} target="_blank" rel="noreferrer"><FileText />閱讀 PDF</a></Button>
+                <Button asChild variant="pop"><a href={current.pdfUrl.replace(/\.pdf$/, ".html")} target="_blank" rel="noreferrer"><FileText />閱讀 PDF</a></Button>
                 <Button asChild variant="outline"><a href={current.pdfUrl} download={`${current.title}.pdf`}><Download />下載 PDF</a></Button>
               </>}
 
