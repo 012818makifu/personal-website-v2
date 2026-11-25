@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Download, Globe, Presentation } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Download, FileText, Globe, Presentation } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Reveal, Tilt } from "@/components/site/interactions";
-import { filterProjects, projectFormats, profile, siteCopy, type Project, type ProjectFormat } from "@/data/profile";
+import { filterProjects, projectFormats, type Project, type ProjectFormat } from "@/data/portfolio";
+import { siteCopy } from "@/data/profile";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/portfolio")({
@@ -16,6 +17,11 @@ export const Route = createFileRoute("/portfolio")({
     { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
   ] }), component: PortfolioPage,
 });
+const formatIcons = { 網站: Globe, PPT: Presentation, PDF: FileText };
+function FormatIcon({ format }: { format: ProjectFormat }) {
+  const Icon = formatIcons[format];
+  return <Icon />;
+}
 const formats = ["全部", ...projectFormats] as const;
 
 function PortfolioPage() {
@@ -41,11 +47,11 @@ function PortfolioPage() {
         <p className="text-sm font-semibold uppercase text-primary">Selected works</p>
         <h1 className="mt-3 text-5xl font-extrabold leading-tight md:text-7xl">精選<span className="text-gradient">作品集</span></h1>
         <p className="mt-5 max-w-xl text-lg text-muted-foreground">{siteCopy.portfolioIntro}</p>
-        <p className="mt-3 text-sm text-muted-foreground">{profile.exampleNotice}</p>
+        <p className="mt-3 text-sm text-muted-foreground">部分作品為排版範例，已於副標題標示。</p>
       </Reveal>
       <Reveal delay={150} className="mt-8 flex flex-wrap gap-3">
         {formats.map((f) => <Button key={f} variant={filter === f ? "ink" : "soft"} aria-pressed={filter === f} onClick={() => { setOpenIdx(null); setFilter(f); }} className="h-11">
-          {f === "網站" ? <Globe /> : f === "PPT" ? <Presentation /> : null}{f}<span className="ml-1 text-xs opacity-70">{filterProjects(f).length}</span>
+          {f !== "全部" && <FormatIcon format={f} />}{f}<span className="ml-1 text-xs opacity-70">{filterProjects(f).length}</span>
         </Button>)}
       </Reveal>
     </section>
@@ -54,8 +60,8 @@ function PortfolioPage() {
         {list.map((p, i) => <Tilt key={p.id} max={4} className="h-full">
           <Button variant="ghost" onClick={() => setOpenIdx(i)} aria-label={`查看${p.title}`} className="pop-card group flex h-full w-full flex-col items-stretch justify-start gap-0 overflow-hidden whitespace-normal p-0 text-left hover:bg-card">
             <div className="relative overflow-hidden border-b-[1.5px] border-ink">
-              <img src={p.image} alt={`${p.title} 排版範例封面`} width={1200} height={675} className="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <span className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-ink bg-card px-3 py-1.5 text-xs font-bold">{p.format === "網站" ? <Globe /> : <Presentation />}{p.format}</span>
+              <img src={p.image} alt={`${p.title} 封面`} width={1200} height={675} className="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <span className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-ink bg-card px-3 py-1.5 text-xs font-bold"><FormatIcon format={p.format} />{p.format}</span>
               <span className="absolute bottom-4 right-4 grid size-10 place-items-center rounded-full border border-ink bg-accent text-accent-foreground"><ArrowUpRight /></span>
             </div>
             <div className="p-6">
@@ -75,7 +81,7 @@ function PortfolioPage() {
             <DialogTitle className="mt-2 text-2xl font-bold md:text-3xl">{current.title}</DialogTitle>
             <DialogDescription className="mt-2 text-sm">{current.subtitle}</DialogDescription>
           </div>
-          {current.format === "PPT" ? <Slides project={current} /> : <div className="mx-6 overflow-hidden rounded-lg border border-ink md:mx-8">
+          {current.format === "PPT" ? <Slides project={current} /> : current.format === "PDF" ? <img src={current.image} alt="報告首頁節錄" className="mx-auto w-[calc(100%-3rem)] rounded-lg border" /> : <div className="mx-6 overflow-hidden rounded-lg border border-ink md:mx-8">
             <div className="flex items-center gap-2 border-b bg-muted px-4 py-2 text-xs text-muted-foreground"><Globe className="size-4" />{current.websiteUrl ? new URL(current.websiteUrl).hostname : "網站作品・範例封面"}</div>
             <img src={current.image} alt={`${current.title} 網站排版範例`} width={1200} height={675} className="aspect-video w-full object-cover" />
           </div>}
@@ -84,10 +90,11 @@ function PortfolioPage() {
             <dl className="mt-6 grid gap-6 border-y py-5 sm:grid-cols-2">
               <div><dt className="text-xs text-muted-foreground">個人貢獻</dt><dd className="mt-1 font-semibold">{current.role}</dd></div>
               <div><dt className="text-xs text-muted-foreground">使用工具</dt><dd className="mt-1 font-semibold">{current.tools.join(" / ")}</dd></div>
-              {current.results.map((r) => <div key={r.label}><dt className="text-xs text-muted-foreground">{r.label}</dt><dd className="mt-1 font-semibold">{r.value}</dd></div>)}
+              {current.results?.map((r) => <div key={r.label}><dt className="text-xs text-muted-foreground">{r.label}</dt><dd className="mt-1 font-semibold">{r.value}</dd></div>)}
             </dl>
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {current.format === "網站" ? current.websiteUrl ? <Button asChild variant="pop"><a href={current.websiteUrl} target="_blank" rel="noreferrer">開啟網站<ArrowUpRight /></a></Button> : <Button variant="outline" disabled><Globe />網站網址待補</Button>
+                : current.format === "PDF" && current.pdfUrl ? <><Button asChild variant="pop"><a href={current.pdfUrl} target="_blank" rel="noreferrer"><FileText />閱讀報告</a></Button><Button asChild variant="outline"><a href={current.pdfUrl} download="區塊鏈金融期中報告.pdf"><Download />下載 PDF</a></Button></>
                 : current.presentationUrl ? <Button asChild variant="pop"><a href={current.presentationUrl} download><Download />下載 PPT</a></Button> : <Button variant="outline" disabled><Download />PPT 檔案待補</Button>}
             </div>
             <div className="mt-8 flex items-center justify-between gap-2 border-t pt-5">
