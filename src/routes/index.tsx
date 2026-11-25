@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CopyEmail } from "@/components/site/CopyEmail";
 import { EducationFields } from "@/components/site/EducationFields";
 import { Counter, Magnetic, Reveal, Tilt, TypeRotator } from "@/components/site/interactions";
+import { projectFormats } from "@/data/portfolio";
 import { profile, timeline, siteCopy } from "@/data/profile";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +28,6 @@ function AboutPage() {
   return (
     <>
       <Hero />
-      <p className="mx-auto max-w-6xl px-5 text-sm text-muted-foreground">{profile.exampleNotice}</p>
       <Stats />
       <EducationFields />
       <AboutBento />
@@ -141,7 +141,7 @@ function Stats() {
           <Reveal key={s.label} delay={i * 90}>
             <div className="pop-card p-6 text-center">
               <p className="font-display text-4xl font-extrabold text-primary md:text-5xl">
-                <Counter value={s.value} suffix={s.suffix} />
+                <Counter value={s.label === "作品格式" ? projectFormats.length : s.value} suffix={s.suffix} />
               </p>
               <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
             </div>

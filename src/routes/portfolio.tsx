@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Download, FileText, Globe, Presentation } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Download, FileText, Globe, Video } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Reveal, Tilt } from "@/components/site/interactions";
-import { filterProjects, projectFormats, type Project, type ProjectFormat } from "@/data/portfolio";
+import { filterProjects, projectFormats, type ProjectFormat } from "@/data/portfolio";
 import { siteCopy } from "@/data/profile";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({ meta: [
@@ -17,7 +16,7 @@ export const Route = createFileRoute("/portfolio")({
     { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
   ] }), component: PortfolioPage,
 });
-const formatIcons = { 網站: Globe, PPT: Presentation, PDF: FileText };
+const formatIcons = { 網站: Globe, 影片: Video, PDF: FileText };
 function FormatIcon({ format }: { format: ProjectFormat }) {
   const Icon = formatIcons[format];
   return <Icon />;
@@ -33,21 +32,18 @@ function PortfolioPage() {
   useEffect(() => {
     if (openIdx === null) return;
     const onKey = (e: KeyboardEvent) => {
-      // Slides handle their own navigation; project controls remain explicit.
-      if (current?.format === "PPT") return;
       if (e.key === "ArrowRight") step(1);
       if (e.key === "ArrowLeft") step(-1);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [openIdx, step, current?.format]);
+  }, [openIdx, step]);
   return <>
     <section className="mx-auto max-w-6xl px-5 pb-10 pt-32 md:pt-40">
       <Reveal>
         <p className="text-sm font-semibold uppercase text-primary">Selected works</p>
         <h1 className="mt-3 text-5xl font-extrabold leading-tight md:text-7xl">精選<span className="text-gradient">作品集</span></h1>
         <p className="mt-5 max-w-xl text-lg text-muted-foreground">{siteCopy.portfolioIntro}</p>
-        <p className="mt-3 text-sm text-muted-foreground">部分作品為排版範例，已於副標題標示。</p>
       </Reveal>
       <Reveal delay={150} className="mt-8 flex flex-wrap gap-3">
         {formats.map((f) => <Button key={f} variant={filter === f ? "ink" : "soft"} aria-pressed={filter === f} onClick={() => { setOpenIdx(null); setFilter(f); }} className="h-11">
@@ -77,25 +73,26 @@ function PortfolioPage() {
       <DialogContent onOpenAutoFocus={(e) => e.preventDefault()} className="top-[4dvh] block max-h-[92dvh] w-[calc(100%-2rem)] max-w-4xl translate-y-0 gap-0 overflow-y-auto border-[1.5px] border-ink p-0 shadow-pop-lg">
         {current && <div key={current.id}>
           <div className="p-6 pb-4 pr-12 md:px-8">
-            <p className="text-xs font-bold text-primary">{current.category} / {current.format} / {current.year}</p>
+            <p className="text-xs font-bold text-primary">{[current.category, current.format, current.year].filter(Boolean).join(" / ")}</p>
             <DialogTitle className="mt-2 text-2xl font-bold md:text-3xl">{current.title}</DialogTitle>
             <DialogDescription className="mt-2 text-sm">{current.subtitle}</DialogDescription>
           </div>
-          {current.format === "PPT" ? <Slides project={current} /> : current.format === "PDF" ? <img src={current.image} alt="報告首頁節錄" className="mx-auto w-[calc(100%-3rem)] rounded-lg border" /> : <div className="mx-6 overflow-hidden rounded-lg border border-ink md:mx-8">
-            <div className="flex items-center gap-2 border-b bg-muted px-4 py-2 text-xs text-muted-foreground"><Globe className="size-4" />{current.websiteUrl ? new URL(current.websiteUrl).hostname : "網站作品・範例封面"}</div>
-            <img src={current.image} alt={`${current.title} 網站排版範例`} width={1200} height={675} className="aspect-video w-full object-cover" />
-          </div>}
+          <img src={current.image} alt={`${current.title} 封面`} className="mx-auto aspect-video w-[calc(100%-3rem)] rounded-lg border object-cover" />
           <div className="p-6 md:p-8">
             <p className="whitespace-pre-line leading-relaxed text-muted-foreground">{current.summary}</p>
             <dl className="mt-6 grid gap-6 border-y py-5 sm:grid-cols-2">
-              <div><dt className="text-xs text-muted-foreground">個人貢獻</dt><dd className="mt-1 font-semibold">{current.role}</dd></div>
-              <div><dt className="text-xs text-muted-foreground">使用工具</dt><dd className="mt-1 font-semibold">{current.tools.join(" / ")}</dd></div>
+              {current.role && <div><dt className="text-xs text-muted-foreground">個人貢獻</dt><dd className="mt-1 font-semibold">{current.role}</dd></div>}
+              {current.tools.length > 0 && <div><dt className="text-xs text-muted-foreground">使用工具</dt><dd className="mt-1 font-semibold">{current.tools.join(" / ")}</dd></div>}
               {current.results?.map((r) => <div key={r.label}><dt className="text-xs text-muted-foreground">{r.label}</dt><dd className="mt-1 font-semibold">{r.value}</dd></div>)}
             </dl>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              {current.format === "網站" ? current.websiteUrl ? <Button asChild variant="pop"><a href={current.websiteUrl} target="_blank" rel="noreferrer">開啟網站<ArrowUpRight /></a></Button> : <Button variant="outline" disabled><Globe />網站網址待補</Button>
-                : current.format === "PDF" && current.pdfUrl ? <><Button asChild variant="pop"><a href={current.pdfUrl} target="_blank" rel="noreferrer"><FileText />閱讀報告</a></Button><Button asChild variant="outline"><a href={current.pdfUrl} download="區塊鏈金融期中報告.pdf"><Download />下載 PDF</a></Button></>
-                : current.presentationUrl ? <Button asChild variant="pop"><a href={current.presentationUrl} download><Download />下載 PPT</a></Button> : <Button variant="outline" disabled><Download />PPT 檔案待補</Button>}
+              {current.websiteUrl && <Button asChild variant="pop"><a href={current.websiteUrl} target="_blank" rel="noreferrer">開啟網站<ArrowUpRight /></a></Button>}
+              {current.videoUrl && <Button asChild variant="pop"><a href={current.videoUrl} target="_blank" rel="noreferrer">在 YouTube 觀看<ArrowUpRight /></a></Button>}
+              {current.pdfUrl && <>
+                <Button asChild variant="pop"><a href={current.pdfUrl} target="_blank" rel="noreferrer"><FileText />閱讀 PDF</a></Button>
+                <Button asChild variant="outline"><a href={current.pdfUrl} download={`${current.title}.pdf`}><Download />下載 PDF</a></Button>
+              </>}
+
             </div>
             <div className="mt-8 flex items-center justify-between gap-2 border-t pt-5">
               <Button variant="soft" size="icon" onClick={() => step(-1)} aria-label="上一個作品" title="上一個作品"><ArrowLeft /></Button>
@@ -107,33 +104,4 @@ function PortfolioPage() {
       </DialogContent>
     </Dialog>
   </>;
-}
-function Slides({ project }: { project: Project }) {
-  const [index, setIndex] = useState(0);
-  const slides = project.slides ?? [];
-  const slide = slides[index];
-  const step = useCallback((dir: number) => setIndex((i) => Math.max(0, Math.min(slides.length - 1, i + dir))), [slides.length]);
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
-      if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [step]);
-  if (!slide) return null;
-  return <div className="px-6 md:px-8">
-    <div className="relative aspect-video overflow-hidden rounded-lg border border-ink bg-ink text-background">
-      <div className="flex h-full flex-col justify-center p-4 sm:p-8 md:p-12">
-        <p className="text-[10px] font-semibold text-accent sm:text-xs">{slide.body}</p>
-        <h3 className="mt-2 text-lg font-bold leading-tight sm:mt-4 sm:text-3xl md:text-4xl">{slide.title}</h3>
-        <ul className="mt-3 space-y-1 text-[11px] leading-relaxed text-background/80 sm:mt-6 sm:space-y-2 sm:text-base">{slide.points.map((p) => <li key={p} className="flex gap-2"><span className="text-accent">—</span><span>{p}</span></li>)}</ul>
-      </div>
-      <span className="absolute bottom-2 right-3 font-display text-xs text-background/50">{String(index + 1).padStart(2, "0")}</span>
-    </div>
-    <div className="mt-3 flex items-center justify-between gap-2">
-      <div className="flex gap-1.5">{slides.map((s, i) => <Button key={s.title} variant="ghost" size="icon" aria-label={`第 ${i + 1} 張投影片`} aria-pressed={index === i} onClick={() => setIndex(i)} className={cn("size-8", index === i && "bg-accent text-accent-foreground")}>{i + 1}</Button>)}</div>
-      <div className="flex items-center gap-2"><Button variant="ghost" size="icon" disabled={index === 0} onClick={() => step(-1)} aria-label="上一張投影片" title="上一張投影片"><ArrowLeft /></Button><span className="text-xs text-muted-foreground">{index + 1} / {slides.length}</span><Button variant="ghost" size="icon" disabled={index === slides.length - 1} onClick={() => step(1)} aria-label="下一張投影片" title="下一張投影片"><ArrowRight /></Button></div>
-    </div>
-  </div>;
 }
